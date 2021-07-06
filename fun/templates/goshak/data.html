@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Patient Registration</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+   
+</script>
+
+	<style type="text/css">*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  color: #384047;
+}
+
+form {
+  max-width: 300px;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background: #f4f7f8;
+  border-radius: 8px;
+}
+
+h1 {
+  margin: 0 0 30px 0;
+  text-align: center;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+textarea,
+select {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  font-size: 16px;
+  height: auto;
+  margin: 0;
+  outline: 0;
+  padding: 15px;
+  width: 100%;
+  background-color: #e8eeef;
+  color: #8a97a0;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+  margin-bottom: 30px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 0 4px 8px 0;
+}
+
+select {
+  padding: 6px;
+  height: 32px;
+  border-radius: 2px;
+}
+
+button {
+  padding: 19px 39px 18px 39px;
+  color: #FFF;
+  background-color: #4bc970;
+  font-size: 18px;
+  text-align: center;
+  font-style: normal;
+  border-radius: 5px;
+  width: 100%;
+  border: 1px solid #3ac162;
+  border-width: 1px 1px 3px;
+  box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+  margin-bottom: 10px;
+}
+
+fieldset {
+  margin-bottom: 30px;
+  border: none;
+}
+
+legend {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+label.light {
+  font-weight: 300;
+  display: inline;
+}
+
+.number {
+  background-color: #5fcf80;
+  color: #fff;
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  font-size: 0.8em;
+  margin-right: 4px;
+  line-height: 30px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+  border-radius: 100%;
+}
+
+@media screen and (min-width: 480px) {
+
+  form {
+    max-width: 480px;
+  }
+
+}
+input, label {
+  margin: 5px 5px;
+}
+
+.form-group {
+  margin: 30px auto;
+  width: 450px;
+}
+
+.form-control {
+  float: left;
+}
+
+#inputStreet {
+  width: 100%;
+}
+
+#inputCity {
+  width: 50%;
+}
+
+#inputState {
+  width: 15%;
+}
+
+#inputZip {
+  width: 28%;
+}
+
+#inputCounty {
+  width: 45%;
+}
+
+#inputCountry {
+  width: 50%;
+}
+
+</style>
+
+	<title>Patient Registration</title>
+</head>
+<body>
+  <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registration</title>
+        <link rel="stylesheet" href="css/normalize.css">
+        <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/main.css">
+   </head>
+    <body>
+
+      <form action="#" method="post">
+      {% csrf_token %}
+        <h1>Patient Registration</h1>
+        
+        <fieldset>
+
+          <label for="Name">PatientName:<span class="req"> *</span></label>
+          <input type="text" id="name" name="patientname" placeholder="patient Name" required autocomplete="off">
+          <label for="Name">DOB:<span class="req"> *</span></label>
+          <input id="datepicker" type="text" onchange="myFunction()" width="276" placeholder="DOB"/>
+          <label for="Name">Insurance Date<span class="req"> *</span></label>
+          <input id="datepicker1" type="text" onchange="insurance()" width="276" placeholder="Insurance"/>
+          <label for="Name">Age:<span class="req"> *</span></label>
+          <input type="text"  id="age" name="age" placeholder="age">
+          
+          <label for="Name">FatherName:<span class="req"> *</span></label>
+          <input type="text" id="name" name="last_name" placeholder="Father's Name" required autocomplete="off">
+
+          <label for="Name">MotherName:<span class="req"> *</span></label>
+          <input type="text" id="name" name="last_name" placeholder="Mother's Name" required autocomplete="off">
+          <label for="Name">Address:<span class="req"> *</span></label>
+          <div class="form-group">
+            <input type="street" 
+                   class="form-control" 
+                   id="autocomplete" 
+                   placeholder="Street">
+                   
+              <select name="city" onchange="state1()" id="city">
+                <option value="None">City</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Madurai">madurai</option>
+                <option value="Kovai">Kovai</option>
+                <option value="Thiruvallur">Thiruvallur</option>
+                <option value="Vellore">vellore</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Vizag">vizag</option>
+                <option value="Tirupati">Tirupati</option>
+                <option value="Nellore">Nellore</option>
+                <option value="Vijayawada">vijayawada</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Manglore">Manglore</option>
+                <option value="Mysore">Mysore</option>
+                <option value="Kolar">Kolar</option>
+                <option value="Gangavati">Gangavati</option>
+
+                
+              </select>
+            <input type="state" 
+                   class="form-control" 
+                   id="state" 
+                   placeholder="State" >
+            
+            <input type="zip" 
+                   class="form-control" 
+                   id="inputZip" 
+                   placeholder="Zip">
+            
+            
+            
+            <input type="country" 
+                   class="form-control" 
+                   id="Country" 
+                   placeholder="Country">
+          </div>
+          
+          <button type="submit">Register</button>
+          
+        </fieldset>
+
+        
+      </form>
+        <script>
+          $('#datepicker').datepicker({
+              uiLibrary: 'bootstrap4'
+          });
+      </script>
+      <script>
+        $('#datepicker1').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+    </script>
+      <script>
+
+    
+        function myFunction() {
+          var today = new Date();
+          var birthDate = new Date(document.getElementById("datepicker").value);
+          var age = today.getFullYear() - birthDate.getFullYear();
+          var m = today.getMonth() - birthDate.getMonth();
+          if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+          {
+              age--;
+          }
+        
+          document.getElementById("age").value=age ;
+      
+          
+        }
+        </script>
+        <script>
+
+    
+          function state1() 
+          {
+            var state={
+            "Tamilnadu": ["Chennai", "Vellore", "Kovai", "Thiruvallur","Madurai"],
+            "Andhrapradesh": ["Hyderabad", "Vizag", "Vijayawada", "Nellore","Tirupati"],
+            "Karnataka": ["Bangalore", "Manglore", "Mysore", "Kolar","Gangavati"]
+            }
+            var Result=document.getElementById("city").value ;
+            for(var k in state)
+            {
+              var j=state[k].includes(Result);
+              if(j===true)
+              {
+
+                var fun=k
+              }
+              
+             
+              
+            }
+            var country="India"
+            document.getElementById("state").value=fun
+            document.getElementById("Country").value=country
+
+          }
+          </script>
+          <script>
+            function insurance()
+            {
+              var insurancedate=new Date(document.getElementById("datepicker1").value);
+            
+              var today=new Date();
+              var year = today.getFullYear();
+              var month = today.getMonth() ;
+              var insuranceyear=insurancedate.getFullYear();
+              var insurancemonth=insurancedate.getMonth();
+              var insurancedate=insurancedate.getDate();
+              if(year>=insuranceyear){
+                alert('Insurance Expired');
+              }
+              //alert('Issued')
+              //console.log(iyear);
+            }
+
+          </script>
+    </body>
+</html>
+</body>
+
+</html>
+
+
